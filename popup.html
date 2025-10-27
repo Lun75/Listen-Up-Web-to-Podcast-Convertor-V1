@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listen Up! Podcast Converter</title>
+  <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Listen Up!</h1>
+      <p class="subtitle">Podcast Converter</p>
+    </header>
+
+    <main>
+      <section class="converter-section">
+        <h2>Convert Podcast</h2>
+        <div class="input-group">
+          <label for="podcast-url">Podcast URL:</label>
+          <input type="url" id="podcast-url" placeholder="Enter podcast URL">
+        </div>
+
+        <div class="format-selection">
+          <label>Output Format:</label>
+          <div class="format-options">
+            <button class="format-btn active" data-format="mp3">MP3</button>
+            <button class="format-btn" data-format="m4a">M4A</button>
+            <button class="format-btn" data-format="ogg">OGG</button>
+          </div>
+        </div>
+
+        <button id="convert-btn" class="primary-btn">Convert</button>
+      </section>
+
+      <section class="status-section">
+        <div id="status-message" class="status-message"></div>
+        <div id="progress-bar" class="progress-bar" style="display: none;">
+          <div class="progress-fill"></div>
+        </div>
+      </section>
+
+      <section class="history-section">
+        <h3>Recent Conversions</h3>
+        <div id="history-list" class="history-list">
+          <p class="empty-state">No conversions yet</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <button id="settings-btn" class="text-btn">Settings</button>
+      <span class="version">v0.1.0</span>
+    </footer>
+  </div>
+
+  <script src="js/popup.js"></script>
+</body>
+</html>
