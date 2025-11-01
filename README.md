@@ -1,4 +1,4 @@
-# Listen Up! Podcast Converter
+# Listen Up! Web to Podcast Converter V1
 
 > Transform web articles into engaging podcast scripts with AI-powered narration
 
