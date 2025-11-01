@@ -69,20 +69,11 @@ To prevent API key leaks and service disruption, the actual working API keys hav
 
 ### For Hackathon Judges & Reviewers
 
-**To test the fully functional extension, please contact me:**
+**Google Cloud automatically disables API keys detected in public repositories. To test the fully functional extension, please contact me:**
 
 📧 **Email**: dialina1125@gmail.com
 💬 **Subject**: "Listen Up! Extension - API Key Access Request"
-
-I will provide you with:
-- ✅ Complete working extension package (zip file)
-- ✅ All necessary API keys pre-configured
-- ✅ Ready to load and test immediately
-
-**Why this approach?**
-- Google Cloud automatically disables API keys detected in public repositories
-- Sharing keys privately prevents service interruption for all testers
-- Ensures the extension remains functional throughout the review period
+I will provide you with a complete working extension package (zip file) and API keys pre-configured and its ready to load and test immediately.
 
 ### For Developers (Building from Source)
 
