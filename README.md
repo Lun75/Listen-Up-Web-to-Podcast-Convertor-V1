@@ -4,7 +4,7 @@
 
 A Chrome extension that uses Firebase AI Logic (Gemini 2.5 Flash) and Google Cloud Text-to-Speech to automatically convert web content into natural-sounding podcast audio.
 
-## ✨ Features
+## Features
 
 - **AI-Powered Script Generation** - Gemini 2.5 Flash creates engaging podcast scripts
 - **Neural2 Text-to-Speech** - 13 high-quality voices (US, UK, AU English)
@@ -13,14 +13,16 @@ A Chrome extension that uses Firebase AI Logic (Gemini 2.5 Flash) and Google Clo
 - **Conversion History** - Track and replay previous conversions
 - Complete pipeline in 7-15 seconds
 
-## 🎬 Demo
+## Instruction
 
 1. Navigate to any article or blog post
 2. Click the extension icon
 3. Click "Convert This Page"
-4. Listen to AI-generated podcast narration
+4. A narrative script shows up
+5. Click Play Audio
+6. Listen to the generated podcast based on the article or blog post
 
-## 📦 Installation
+## Installation
 
 ### For End Users (Coming Soon)
 Extension will be available on Chrome Web Store
@@ -32,12 +34,10 @@ Extension will be available on Chrome Web Store
    git clone https://github.com/Lun75/listen-up-podcast-converter.git
    cd listen-up-podcast-converter
    ```
-
 2. **Install dependencies:**
    ```bash
    npm install
    ```
-
 3. **Build the offscreen bundle:**
    ```bash
    npx esbuild src/offscreen-firebase.js \
@@ -45,14 +45,13 @@ Extension will be available on Chrome Web Store
      --outfile=offscreen-bundle-v2.js \
      --format=esm
    ```
-
 4. **Load in Chrome:**
    - Open `chrome://extensions/`
    - Enable "Developer mode"
    - Click "Load unpacked"
    - Select the project directory
 
-## ⚙️ Configuration
+## Configuration
 
 ### Demo API Keys (Included)
 
@@ -60,16 +59,14 @@ The extension includes demo Firebase and Google Cloud API keys for testing:
 - **Firebase API Key**: For Gemini AI (included)
 - **Google Cloud TTS API Key**: For Neural2 voices (included)
 
-⚠️ **Important Notes:**
-- Demo keys have **limited quota** (free trial)
+**Important Notes:**
+- Demo keys have **limited quota** 
 - Keys are restricted to specific APIs only
 - **For production use**, create your own Firebase project (see Setup Guide below)
 
 ### Setup Your Own Firebase Project (Optional)
 
 See [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) for detailed setup instructions.
-
-## 🚀 Usage
 
 ### Basic Conversion
 
@@ -102,7 +99,7 @@ See [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) for detailed setup instru
 - **Copy to Clipboard**: Quick copy for editing
 - **View History**: Access previous conversions
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 Web Content → Content Extraction → Gemini AI (Summarize + Rewrite)
@@ -117,7 +114,7 @@ Web Content → Content Extraction → Gemini AI (Summarize + Rewrite)
 
 See [AI_PIPELINE.md](AI_PIPELINE.md) for detailed architecture documentation.
 
-## 🛠️ Development
+## Development
 
 ### Project Structure
 
@@ -169,7 +166,7 @@ await chrome.runtime.sendMessage({ action: 'ping' })
 // Should return: {success: true, firebaseInitialized: true}
 ```
 
-## 📊 Performance
+## Performance
 
 - **Content Extraction**: < 100ms
 - **AI Summarization**: 2-4 seconds
@@ -181,7 +178,7 @@ await chrome.runtime.sendMessage({ action: 'ping' })
 - Offscreen bundle: 152KB
 - Total extension: ~500KB
 
-## 🔐 Privacy & Security
+## Privacy & Security
 
 - **Local Processing**: Content extraction happens in browser
 - **Cloud Processing**: AI and TTS via Google Cloud APIs
@@ -191,7 +188,7 @@ await chrome.runtime.sendMessage({ action: 'ping' })
 
 All content sent to Google Cloud for AI processing is temporary and not stored.
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -214,7 +211,7 @@ All content sent to Google Cloud for AI processing is temporary and not stored.
 
 See [DEBUGGING.md](DEBUGGING.md) for detailed troubleshooting guide.
 
-## 📚 Documentation
+## Documentation
 
 - **[AI_PIPELINE.md](AI_PIPELINE.md)** - Complete architecture documentation
 - **[DEBUGGING.md](DEBUGGING.md)** - Troubleshooting guide
@@ -236,24 +233,23 @@ See [DEBUGGING.md](DEBUGGING.md) for detailed troubleshooting guide.
 - RSS feed generation
 - Chrome Web Store publication
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Firebase AI Logic SDK** - Gemini 2.5 Flash integration
 - **Google Cloud Text-to-Speech** - Neural2 voices
 - **Chrome Extensions Team** - Manifest V3 platform
 
-## 📞 Support
+## Support
 
 - **Issues**: [GitHub Issues](https://github.com/Lun75/listen-up-podcast-converter/issues)
 - **Documentation**: See docs
 - **Email**: lun7543@gmail.com
 
-## 📈 Version History
-
+## Version History
 **v0.1.0** (Current)
 - Initial release
 - Firebase AI Logic integration
