@@ -4,14 +4,14 @@
 
 A Chrome extension that uses **Chrome's built-in Summarizer API** (Gemini Nano on-device), Firebase AI Logic (Gemini 2.5 Flash), and Google Cloud Text-to-Speech to automatically convert web content into natural-sounding podcast audio.
 
-## 🏆 Chrome Built-in AI Challenge
+## Chrome Built-in AI Challenge
 
 This extension leverages **Chrome's built-in AI APIs** to provide intelligent content summarization:
 
-- ✅ **Chrome Summarizer API** - Uses on-device Gemini Nano for fast, privacy-preserving content summarization
-- ✅ **Chrome Prompt API** - Alternative on-device AI for text generation and summarization
-- ✅ **Hybrid AI Architecture** - Combines Chrome's built-in AI with cloud AI for optimal quality
-- ✅ **Intelligent Fallback** - Gracefully falls back to Firebase AI Logic if built-in AI is unavailable
+- **Chrome Summarizer API** - Uses on-device Gemini Nano for fast, privacy-preserving content summarization
+- **Chrome Prompt API** - Alternative on-device AI for text generation and summarization
+- **Hybrid AI Architecture** - Combines Chrome's built-in AI with cloud AI for optimal quality
+- **Intelligent Fallback** - falls back to Firebase AI Logic for maintaining robust functionality
 
 ## Features
 
