@@ -257,7 +257,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 - **Issues**: [GitHub Issues](https://github.com/Lun75/listen-up-podcast-converter/issues)
 - **Documentation**: See docs
-- **Email**: lun7543@gmail.com
 
 ## Version History
 **v0.1.0** (Current)
@@ -273,4 +272,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 **Note**: This extension uses Google Cloud APIs which have usage quotas. Demo API keys are provided for testing but may have limited availability. For production use, please set up your own Firebase project.
 
-Made with ❤️ by Dialina
+By Dialina
