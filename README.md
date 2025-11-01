@@ -2,16 +2,25 @@
 
 > Transform web articles into engaging podcast scripts with AI-powered narration
 
-A Chrome extension that uses Firebase AI Logic (Gemini 2.5 Flash) and Google Cloud Text-to-Speech to automatically convert web content into natural-sounding podcast audio.
+A Chrome extension that uses **Chrome's built-in Summarizer API** (Gemini Nano on-device), Firebase AI Logic (Gemini 2.5 Flash), and Google Cloud Text-to-Speech to automatically convert web content into natural-sounding podcast audio.
+
+## 🏆 Chrome Built-in AI Challenge
+
+This extension leverages **Chrome's built-in AI APIs** to provide intelligent content summarization:
+
+- ✅ **Chrome Summarizer API** - Uses on-device Gemini Nano for fast, privacy-preserving content summarization
+- ✅ **Hybrid AI Architecture** - Combines Chrome's built-in AI with cloud AI for optimal quality
+- ✅ **Intelligent Fallback** - Gracefully falls back to Firebase AI Logic if built-in AI is unavailable
 
 ## ✨ Features
 
-- 🤖 **AI-Powered Script Generation** - Gemini 2.5 Flash creates engaging podcast scripts
+- 🤖 **Chrome Built-in Summarizer API** - On-device Gemini Nano for content summarization (privacy-preserving)
 - 🎙️ **Neural2 Text-to-Speech** - 13 high-quality voices (US, UK, AU English)
 - 📝 **SSML Processing** - Natural pauses, emphasis, and intonation
 - 🎚️ **Customizable Output** - Adjust difficulty level and length
 - 📚 **Conversion History** - Track and replay previous conversions
 - ⚡ **Fast Processing** - Complete pipeline in 7-15 seconds
+- 🔒 **Privacy-First** - On-device summarization with Chrome's built-in AI (when available)
 
 ## 🎬 Demo
 
@@ -27,10 +36,14 @@ Extension will be available on Chrome Web Store
 
 ### For Developers
 
+**Prerequisites:**
+- Chrome 127+ (for Chrome built-in AI APIs)
+- Or Chrome Canary/Dev channel (for experimental AI features)
+
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Lun75/listen-up-podcast-converter.git
-   cd listen-up-podcast-converter
+   git clone https://github.com/Lun75/Listen-Up-Web-to-Podcast-Convertor-V1.git
+   cd Listen-Up-Web-to-Podcast-Convertor-V1
    ```
 
 2. **Install dependencies:**
@@ -46,11 +59,29 @@ Extension will be available on Chrome Web Store
      --format=esm
    ```
 
-4. **Load in Chrome:**
+4. **Enable Chrome Built-in AI (Required for Summarizer API):**
+   - Navigate to `chrome://flags/#optimization-guide-on-device-model`
+   - Set to "Enabled BypassPerfRequirement"
+   - Navigate to `chrome://flags/#summarization-api-for-gemini-nano`
+   - Set to "Enabled"
+   - Restart Chrome
+   - Chrome will download Gemini Nano model (~1.7GB) in background
+
+5. **Load in Chrome:**
    - Open `chrome://extensions/`
    - Enable "Developer mode"
    - Click "Load unpacked"
    - Select the project directory
+
+### Verifying Chrome Built-in AI Setup
+
+Open browser console (F12) and check:
+```javascript
+await window.ai.summarizer.capabilities()
+// Should return: { available: 'readily' } or { available: 'after-download' }
+```
+
+If `available: 'no'`, the built-in AI is not available. Extension will automatically fallback to Firebase AI Logic.
 
 ## ⚙️ Configuration
 
@@ -128,15 +159,23 @@ See [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) for detailed setup instru
 ## 🏗️ Architecture
 
 ```
-Web Content → Content Extraction → Gemini AI (Summarize + Rewrite)
+Web Content → Content Extraction
+  → Chrome Summarizer API (Gemini Nano on-device)
+  → Firebase AI Logic (Gemini 2.5 Flash - conversational rewriting)
   → SSML Conversion → Google Cloud TTS → Audio Playback
 ```
 
 **Key Components:**
-- **Firebase AI Logic SDK**: Gemini 2.5 Flash for script generation
+- **Chrome Summarizer API**: On-device Gemini Nano for initial content summarization (privacy-preserving, fast)
+- **Firebase AI Logic SDK**: Gemini 2.5 Flash for conversational rewriting and fallback summarization
 - **Google Cloud TTS**: Neural2 voices for high-quality audio
 - **SSML Processing**: Removes formatting, adds natural pauses
 - **Chrome Extension MV3**: Modern extension architecture
+
+**Hybrid AI Approach:**
+1. **Step 1**: Chrome's built-in Summarizer API condenses article (on-device, private)
+2. **Step 2**: Firebase AI Logic rewrites summary in conversational podcast style (cloud, high-quality)
+3. **Fallback**: If Chrome API unavailable, Firebase handles both steps
 
 See [AI_PIPELINE.md](AI_PIPELINE.md) for detailed architecture documentation.
 

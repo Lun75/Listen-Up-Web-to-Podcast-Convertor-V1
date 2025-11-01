@@ -113,11 +113,17 @@ class PipelineOrchestrator {
       const summary = summaryResult.summary;
       const summarySource = summaryResult.source;
 
+      // Show user-friendly message based on AI source
+      const userMessage =
+        summarySource === 'chrome-builtin-summarizer-api' ? 'Summary complete (Chrome Summarizer API - Privacy-preserving)' :
+        summarySource === 'chrome-builtin-prompt-api' ? 'Summary complete (Chrome Prompt API - Privacy-preserving)' :
+        'Summary complete (Firebase AI)';
+
       this.updateProgress(onProgress, {
         step: 3,
         total: 5,
         status: 'summarized',
-        message: `Summary complete (${summarySource})`,
+        message: userMessage,
         data: { summaryLength: summary.split(/\s+/).length, source: summarySource }
       });
 
@@ -275,6 +281,9 @@ class PipelineOrchestrator {
 
   /**
    * Summarize content with chunking support for long text
+   * Uses Chrome's built-in Summarizer API first (for hackathon requirement),
+   * then falls back to Firebase AI Logic if unavailable
+   *
    * @param {string} text - Text to summarize
    * @param {Object} settings - Settings
    * @param {Function} onProgress - Progress callback
@@ -282,6 +291,89 @@ class PipelineOrchestrator {
    */
   async summarizeContent(text, settings, onProgress) {
     const MAX_CHUNK_SIZE = 4000;
+
+    // Try Chrome's built-in AI APIs first (Gemini Nano on-device)
+    // Supports both Summarizer API and Prompt API for hackathon compatibility
+    try {
+      // Method 1: Try Summarizer API (preferred)
+      if (window.ai && window.ai.summarizer) {
+        console.log('🤖 Attempting Chrome built-in Summarizer API (Gemini Nano)...');
+
+        const canSummarize = await window.ai.summarizer.capabilities();
+
+        if (canSummarize && canSummarize.available !== 'no') {
+          // Create summarizer with appropriate settings
+          const summarizerOptions = {
+            type: 'key-points', // or 'tl;dr', 'teaser', 'headline'
+            format: 'markdown',
+            length: settings.length === 'short' ? 'short' :
+                    settings.length === 'long' ? 'long' : 'medium'
+          };
+
+          const summarizer = await window.ai.summarizer.create(summarizerOptions);
+
+          // Truncate if text is too long
+          const textToSummarize = text.length <= MAX_CHUNK_SIZE ?
+            text : text.substring(0, MAX_CHUNK_SIZE);
+
+          console.log('✅ Using Chrome Summarizer API (on-device Gemini Nano)');
+          const summary = await summarizer.summarize(textToSummarize);
+
+          // Destroy summarizer to free resources
+          summarizer.destroy();
+
+          return {
+            summary: summary,
+            source: 'chrome-builtin-summarizer-api' // For hackathon requirement
+          };
+        } else {
+          console.log('⚠️ Chrome Summarizer API not ready (status:', canSummarize?.available, ')');
+        }
+      }
+
+      // Method 2: Try Prompt API (alternative Chrome built-in AI)
+      if (window.ai && window.ai.languageModel) {
+        console.log('🤖 Attempting Chrome built-in Prompt API (Gemini Nano)...');
+
+        const canPrompt = await window.ai.languageModel.capabilities();
+
+        if (canPrompt && canPrompt.available !== 'no') {
+          const session = await window.ai.languageModel.create({
+            systemPrompt: 'You are a helpful assistant that summarizes articles into key points.'
+          });
+
+          // Truncate if text is too long
+          const textToSummarize = text.length <= MAX_CHUNK_SIZE ?
+            text : text.substring(0, MAX_CHUNK_SIZE);
+
+          const lengthGuide = settings.length === 'short' ? '3-5 bullet points' :
+                             settings.length === 'long' ? '10-15 bullet points' : '6-8 bullet points';
+
+          const prompt = `Summarize the following article into ${lengthGuide} in markdown format:\n\n${textToSummarize}`;
+
+          console.log('✅ Using Chrome Prompt API (on-device Gemini Nano)');
+          const summary = await session.prompt(prompt);
+
+          // Destroy session to free resources
+          session.destroy();
+
+          return {
+            summary: summary,
+            source: 'chrome-builtin-prompt-api' // For hackathon requirement
+          };
+        } else {
+          console.log('⚠️ Chrome Prompt API not ready (status:', canPrompt?.available, ')');
+        }
+      }
+
+      console.log('⚠️ No Chrome built-in AI available, falling back to Firebase AI');
+
+    } catch (error) {
+      console.warn('❌ Chrome built-in AI failed, falling back to Firebase:', error.message);
+    }
+
+    // Fallback to Firebase AI Logic (existing implementation)
+    console.log('🔄 Using Firebase AI Logic for summarization...');
 
     if (text.length <= MAX_CHUNK_SIZE) {
       return await this.aiService.summarizeContent(
