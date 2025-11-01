@@ -9,18 +9,16 @@ Chrome Extension using Built-in AI APIs
 ---
 
 ## Application Description
-
 ### What It Does
-
 Listen Up! is a Chrome extension that transforms any web article into an engaging, natural-sounding podcast. Users can click the extension icon, select "Convert This Page," and within seconds receive an AI-generated podcast script with high-quality text-to-speech narration.
 
 **Key Features:**
-- 🤖 Intelligent content summarization using Chrome's built-in Summarizer API
-- 🎙️ Natural podcast-style narration with 13 Neural2 voices
-- 📝 Customizable difficulty (Easy/Medium/Hard) and length (Short/Medium/Long)
-- 📚 Conversion history for replaying previous podcasts
-- ⚡ Fast processing (7-15 seconds complete pipeline)
-- 🔒 Privacy-preserving on-device AI summarization
+- Intelligent content summarization using Chrome's built-in Summarizer API
+- Natural podcast-style narration with 13 Neural2 voices
+- Customizable difficulty (Easy/Medium/Hard) and length (Short/Medium/Long)
+- Conversion history for replaying previous podcasts
+- Fast processing (7-15 seconds complete pipeline)
+- Privacy-preserving on-device AI summarization
 
 ---
 
@@ -129,22 +127,6 @@ if (canSummarize && canSummarize.available !== 'no') {
 
 ---
 
-## Why Chrome Built-in AI is Essential
-
-### Before Chrome Summarizer API:
-- ❌ All content sent to cloud for processing (privacy concern)
-- ❌ Higher latency (network round-trip)
-- ❌ Bandwidth-intensive
-- ❌ Requires internet for all steps
-- ❌ Potential data exposure
-
-### After Chrome Summarizer API Integration:
-- ✅ **Privacy-preserving:** Summarization happens on-device
-- ✅ **Faster:** No network latency for summarization
-- ✅ **Lower bandwidth:** Only rewriting uses cloud
-- ✅ **Partial offline:** Summarization works without internet
-- ✅ **Better UX:** Instant feedback during processing
-
 ### Hybrid Architecture Benefits
 
 We combine Chrome's built-in AI with cloud AI for best-of-both-worlds:
@@ -203,12 +185,6 @@ async summarizeContent(text, settings) {
   return await firebaseAISummarize(text, settings);
 }
 ```
-
-**Why This Matters:**
-- Works on Chrome 127+ with built-in AI
-- Gracefully degrades on older Chrome versions
-- No user setup required (automatic detection)
-- Best experience when available, functional always
 
 ---
 
@@ -362,21 +338,14 @@ diseases faster...
 ---
 
 ## Testing & Validation
-
 ### Tested Scenarios
 
-✅ Wikipedia articles (500-5000 words)
-✅ Technical blog posts (code examples, jargon)
-✅ News articles (cluttered with ads)
-✅ Research papers (academic language)
-✅ Documentation (MDN, developer guides)
+- Wikipedia articles (500-5000 words)
+- Technical blog posts (code examples, jargon)
+- News articles (cluttered with ads)
+- Research papers (academic language)
+- Documentation (MDN, developer guides)
 
-### Chrome Built-in AI Testing
-
-✅ With Summarizer API enabled (Chrome Canary 127+)
-✅ Without Summarizer API (fallback to Firebase)
-✅ Summarizer API downloading model (graceful handling)
-✅ Mixed environments (some users with, some without)
 
 ### Testing Chrome Summarizer API (For Judges)
 
@@ -385,7 +354,6 @@ diseases faster...
 1. **Install Chrome Canary:**
    - Download: https://www.google.com/chrome/canary/
    - Chrome Canary has latest experimental APIs
-
 2. **Enable flags:**
    ```
    chrome://flags/#optimization-guide-on-device-model
@@ -396,7 +364,6 @@ diseases faster...
 
    Restart Chrome Canary
    ```
-
 3. **Wait for Gemini Nano download:**
    - Check: `chrome://components/`
    - Find: "Optimization Guide On Device Model"
@@ -430,16 +397,6 @@ diseases faster...
 
 ---
 
-## Conclusion
-
-Listen Up! demonstrates the power of Chrome's built-in AI APIs by creating a practical, privacy-preserving solution to information overload. By combining on-device Summarizer API with cloud AI for quality enhancement, we deliver:
-
-✅ **Privacy:** Sensitive content stays on-device
-✅ **Speed:** On-device processing reduces latency
-✅ **Quality:** Cloud AI provides natural podcast narration
-✅ **Accessibility:** Makes content consumable by everyone
-✅ **Innovation:** Hybrid architecture sets new standard
-
 The extension showcases how Chrome's built-in AI can enable new use cases that weren't possible before—turning every web article into a podcast in seconds, while keeping user data private.
 
 ---
@@ -458,8 +415,8 @@ The extension showcases how Chrome's built-in AI can enable new use cases that w
 
 ## Developer Information
 
-- **Name:** Dialina Siu
-- **Email:** dialina1125@gmail.com
+- **Name:** Lun75/Dialina
+- **Email:** lun7543@gmail.com
 - **GitHub:** [@Lun75](https://github.com/Lun75)
 
 ---
