@@ -8,8 +8,7 @@ A Chrome extension that uses **Chrome's built-in Summarizer API** (Gemini Nano o
 
 **Google Cloud automatically disables API keys detected in public repositories. To test the fully functional extension, please contact me:**
 
-📧 **Email**: dialina1125@gmail.com
-💬 **Subject**: "Listen Up! Extension - API Key Access Request"
+**Email**: dialina1125@gmail.com
 I will provide you with a complete working extension package (zip file) and API keys pre-configured and its ready to load and test immediately.
 
 **This repository contains placeholder API keys for security reasons.**
