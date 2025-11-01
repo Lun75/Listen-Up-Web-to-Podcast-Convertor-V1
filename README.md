@@ -6,12 +6,12 @@ A Chrome extension that uses Firebase AI Logic (Gemini 2.5 Flash) and Google Clo
 
 ## ✨ Features
 
-- 🤖 **AI-Powered Script Generation** - Gemini 2.5 Flash creates engaging podcast scripts
-- 🎙️ **Neural2 Text-to-Speech** - 13 high-quality voices (US, UK, AU English)
-- 📝 **SSML Processing** - Natural pauses, emphasis, and intonation
-- 🎚️ **Customizable Output** - Adjust difficulty level and length
-- 📚 **Conversion History** - Track and replay previous conversions
-- ⚡ **Fast Processing** - Complete pipeline in 7-15 seconds
+- **AI-Powered Script Generation** - Gemini 2.5 Flash creates engaging podcast scripts
+- **Neural2 Text-to-Speech** - 13 high-quality voices (US, UK, AU English)
+- **SSML Processing** - Natural pauses, emphasis, and intonation
+- **Customizable Output** - Adjust difficulty level and length
+- **Conversion History** - Track and replay previous conversions
+- Complete pipeline in 7-15 seconds
 
 ## 🎬 Demo
 
