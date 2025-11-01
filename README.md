@@ -9,7 +9,7 @@ A Chrome extension that uses **Chrome's built-in Summarizer API** (Gemini Nano o
 **Google Cloud automatically disables API keys detected in public repositories. To test the fully functional extension with API keys, please contact me:**
 
 **Email**: dialina1125@gmail.com
-I will provide you with a complete working extension package (zip file) with API keys pre-configured and its ready to load and test immediately.
+I will provide you API keys pre-configured and its ready to load and test immediately.
 
 **This repository contains placeholder API keys for security reasons.**
 To prevent API key leaks and service disruption, the actual working API keys have been removed from this public repository.
