@@ -11,13 +11,13 @@ import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'https://www.gst
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAlWiCOhkKqnAe7capXZ4MXQxt0yrq6cOU",
-  authDomain: "web-to-podcast-chromeextension.firebaseapp.com",
-  projectId: "web-to-podcast-chromeextension",
-  storageBucket: "web-to-podcast-chromeextension.firebasestorage.app",
-  messagingSenderId: "582025661331",
-  appId: "1:582025661331:web:742d54611bd628a2f3b666",
-  measurementId: "G-FGQ5FEHWW7"
+  apiKey: "YOUR_FIREBASE_API_KEY_HERE",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.firebasestorage.app",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
 };
 
 // Initialize Firebase
