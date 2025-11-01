@@ -67,29 +67,6 @@ The extension includes demo Firebase and Google Cloud API keys for testing:
 
 ### Setup Your Own Firebase Project (Optional)
 
-If you want unlimited usage or the demo keys stop working:
-
-1. **Create Firebase Project:**
-   - Go to [Firebase Console](https://console.firebase.google.com/)
-   - Create new project: "My Podcast Converter"
-   - Add a web app
-
-2. **Enable Required Services:**
-   - Firebase AI Logic (Gemini)
-   - Set enforcement to "Unenforced" (for development)
-
-3. **Enable Google Cloud TTS:**
-   - Go to [Google Cloud Console](https://console.cloud.google.com/)
-   - Enable "Cloud Text-to-Speech API"
-   - Create API key
-   - Restrict to "Cloud Text-to-Speech API"
-
-4. **Update Configuration:**
-   - Edit `src/offscreen-firebase.js`
-   - Replace `firebaseConfig` with your config
-   - Replace `TTS_API_KEY` with your TTS key
-   - Rebuild bundle (step 3 above)
-
 See [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) for detailed setup instructions.
 
 ## 🚀 Usage
@@ -244,18 +221,6 @@ See [DEBUGGING.md](DEBUGGING.md) for detailed troubleshooting guide.
 - **[IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)** - Developer guide
 - **[CLAUDE.md](CLAUDE.md)** - Development guidelines
 
-## 🤝 Contributing
-
-Contributions welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Test thoroughly (see DEBUGGING.md)
-5. Commit (`git commit -m 'Add amazing feature'`)
-6. Push (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
-
 ### Development Guidelines
 
 - Follow existing code style (ES6+, async/await)
@@ -263,16 +228,6 @@ Contributions welcome! Please:
 - Test with multiple websites
 - Update documentation if needed
 - Rebuild bundle after Firebase changes
-
-## 🗺️ Roadmap
-
-### Planned Features
-- [ ] Backend proxy via Firebase Cloud Functions (secure API keys)
-- [ ] Multi-speaker support (different voices for dialogue)
-- [ ] Background music (intro/outro)
-- [ ] Batch conversion (multiple articles)
-- [ ] Export MP3 with metadata
-- [ ] Integration with podcast platforms
 
 ### Ideas
 - Offline mode with cached scripts
@@ -294,8 +249,8 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ## 📞 Support
 
 - **Issues**: [GitHub Issues](https://github.com/Lun75/listen-up-podcast-converter/issues)
-- **Documentation**: See docs/ folder
-- **Email**: dialina1125@gmail.com
+- **Documentation**: See docs
+- **Email**: lun7543@gmail.com
 
 ## 📈 Version History
 
