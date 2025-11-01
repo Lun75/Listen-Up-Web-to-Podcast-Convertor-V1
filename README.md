@@ -61,22 +61,32 @@ Extension will be available on Chrome Web Store
    - Click "Load unpacked"
    - Select the project directory
 
-## Configuration
+## ⚠️ Important: API Keys Required
 
-### Demo API Keys (Included)
+**This repository contains placeholder API keys for security reasons.**
 
-The extension includes demo Firebase and Google Cloud API keys for testing:
-- **Firebase API Key**: For Gemini AI (included)
-- **Google Cloud TTS API Key**: For Neural2 voices (included)
+To prevent API key leaks and service disruption, the actual working API keys have been removed from this public repository.
 
-**Important Notes:**
-- Demo keys have **limited quota** 
-- Keys are restricted to specific APIs only
-- **For production use**, create your own Firebase project (see Setup Guide below)
+### For Hackathon Judges & Reviewers
 
-### Setup Your Own Firebase Project (Optional)
+**To test the fully functional extension, please contact me:**
 
-See [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) for detailed setup instructions.
+📧 **Email**: dialina1125@gmail.com
+💬 **Subject**: "Listen Up! Extension - API Key Access Request"
+
+I will provide you with:
+- ✅ Complete working extension package (zip file)
+- ✅ All necessary API keys pre-configured
+- ✅ Ready to load and test immediately
+
+**Why this approach?**
+- Google Cloud automatically disables API keys detected in public repositories
+- Sharing keys privately prevents service interruption for all testers
+- Ensures the extension remains functional throughout the review period
+
+### For Developers (Building from Source)
+
+If you want to build your own version, see [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) for detailed setup instructions on creating your own Firebase project and Google Cloud API keys.
 
 ### Basic Conversion
 
@@ -270,6 +280,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-**Note**: This extension uses Google Cloud APIs which have usage quotas. Demo API keys are provided for testing but may have limited availability. For production use, please set up your own Firebase project.
+**Note**: This extension uses Google Cloud APIs which have usage quotas. API keys are not included in this public repository to prevent unauthorized use and service disruption. **Contact dialina1125@gmail.com to receive the complete working package for testing.**
 
 By Dialina

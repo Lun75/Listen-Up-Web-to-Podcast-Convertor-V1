@@ -10,19 +10,21 @@ import { getAI, getGenerativeModel, GoogleAIBackend } from 'firebase/ai';
 console.log('📄 Offscreen document loaded (bundled)');
 
 // Firebase configuration
+// NOTE: API keys have been removed for security.
+// Judges: Please download the complete package from Google Drive (link in README.md)
 const firebaseConfig = {
-  apiKey: "AIzaSyAlWiCOhkKqnAe7capXZ4MXQxt0yrq6cOU",
-  authDomain: "web-to-podcast-chromeextension.firebaseapp.com",
-  projectId: "web-to-podcast-chromeextension",
-  storageBucket: "web-to-podcast-chromeextension.firebasestorage.app",
-  messagingSenderId: "582025661331",
-  appId: "1:582025661331:web:742d54611bd628a2f3b666",
-  measurementId: "G-FGQ5FEHWW7"
+  apiKey: "YOUR_FIREBASE_API_KEY_HERE",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.firebasestorage.app",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
 };
 
 // App Check Debug Token from Firebase Console
 // This token allows development/testing without reCAPTCHA
-const APP_CHECK_DEBUG_TOKEN = '07AADCFB-ED1C-4057-9CCB-37DCC59DF14F';
+const APP_CHECK_DEBUG_TOKEN = 'YOUR_APP_CHECK_DEBUG_TOKEN_HERE';
 
 let app = null;
 let appCheck = null;
@@ -46,29 +48,15 @@ function convertScriptToSSML(text) {
   // STEP 2: Remove ALL square bracket content (placeholders, names, instructions)
   ssml = ssml.replace(/\[[^\]]*\]/g, ' ');
 
-  // STEP 3: Convert markdown formatting to SSML with emotion context
-  // **bold** -> emphasis with slight pitch increase (excitement/importance)
-  ssml = ssml.replace(/\*\*([^*]+)\*\*/g, function(_match, content) {
-    // Only emphasize short phrases (< 50 chars), otherwise just remove asterisks
-    if (content.length < 50) {
-      return '<emphasis level="strong"><prosody pitch="+2st">' + content + '</prosody></emphasis>';
-    } else {
-      return content;
-    }
-  });
+  // STEP 3: Remove markdown formatting (keep it simple for valid SSML)
+  // Remove **bold**
+  ssml = ssml.replace(/\*\*([^*]+)\*\*/g, '$1');
 
-  // *italic* -> moderate emphasis with slight rate change
-  ssml = ssml.replace(/\*([^*]+)\*/g, '<emphasis level="moderate">$1</emphasis>');
+  // Remove *italic*
+  ssml = ssml.replace(/\*([^*]+)\*/g, '$1');
 
   // Remove any leftover asterisks
   ssml = ssml.replace(/\*/g, '');
-
-  // STEP 3.5: Add emotional prosody based on punctuation context
-  // Exclamation marks -> increase pitch and rate slightly (excitement)
-  ssml = ssml.replace(/([^.!?]+!)/g, '<prosody pitch="+1st" rate="105%">$1</prosody>');
-
-  // Question marks -> increase pitch at end (inquisitive tone)
-  ssml = ssml.replace(/([^.!?]+\?)/g, '<prosody pitch="+2st">$1</prosody>');
 
   // STEP 4: Remove speaker labels at start of lines
   ssml = ssml.replace(/^[Hh]ost:\s*/gm, '');
@@ -368,7 +356,8 @@ IMPORTANT FORMATTING RULES:
     console.log('🎙️ SSML has parentheses?', ssmlText.includes('('));
 
     // Use dedicated TTS API key (separate from Firebase key)
-    const TTS_API_KEY = 'AIzaSyDFkbh8oCVVD8r3S8vSfBHQgpOAZrnC4Qg';
+    // NOTE: API key removed for security. Contact dialina1125@gmail.com for the working version.
+    const TTS_API_KEY = 'YOUR_GOOGLE_CLOUD_TTS_API_KEY_HERE';
 
     // Call Google Cloud Text-to-Speech REST API
     const apiUrl = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${TTS_API_KEY}`;

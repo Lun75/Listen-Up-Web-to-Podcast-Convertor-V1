@@ -3969,15 +3969,15 @@ registerAI();
 // src/offscreen-firebase.js
 console.log("\u{1F4C4} Offscreen document loaded (bundled)");
 var firebaseConfig = {
-  apiKey: "AIzaSyAlWiCOhkKqnAe7capXZ4MXQxt0yrq6cOU",
-  authDomain: "web-to-podcast-chromeextension.firebaseapp.com",
-  projectId: "web-to-podcast-chromeextension",
-  storageBucket: "web-to-podcast-chromeextension.firebasestorage.app",
-  messagingSenderId: "582025661331",
-  appId: "1:582025661331:web:742d54611bd628a2f3b666",
-  measurementId: "G-FGQ5FEHWW7"
+  apiKey: "YOUR_FIREBASE_API_KEY_HERE",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.firebasestorage.app",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
 };
-var APP_CHECK_DEBUG_TOKEN = "07AADCFB-ED1C-4057-9CCB-37DCC59DF14F";
+var APP_CHECK_DEBUG_TOKEN = "YOUR_APP_CHECK_DEBUG_TOKEN_HERE";
 var app = null;
 var appCheck = null;
 var ai = null;
@@ -3988,17 +3988,9 @@ function convertScriptToSSML(text) {
   console.log("\u{1F4CF} Original length:", text.length);
   ssml = ssml.replace(/\([^)]*\)/g, " ");
   ssml = ssml.replace(/\[[^\]]*\]/g, " ");
-  ssml = ssml.replace(/\*\*([^*]+)\*\*/g, function(_match, content) {
-    if (content.length < 50) {
-      return '<emphasis level="strong"><prosody pitch="+2st">' + content + "</prosody></emphasis>";
-    } else {
-      return content;
-    }
-  });
-  ssml = ssml.replace(/\*([^*]+)\*/g, '<emphasis level="moderate">$1</emphasis>');
+  ssml = ssml.replace(/\*\*([^*]+)\*\*/g, "$1");
+  ssml = ssml.replace(/\*([^*]+)\*/g, "$1");
   ssml = ssml.replace(/\*/g, "");
-  ssml = ssml.replace(/([^.!?]+!)/g, '<prosody pitch="+1st" rate="105%">$1</prosody>');
-  ssml = ssml.replace(/([^.!?]+\?)/g, '<prosody pitch="+2st">$1</prosody>');
   ssml = ssml.replace(/^[Hh]ost:\s*/gm, "");
   ssml = ssml.replace(/^[Nn]arrator:\s*/gm, "");
   ssml = ssml.replace(/^[Ss]peaker:\s*/gm, "");
@@ -4217,7 +4209,7 @@ ${text}`;
     console.log("\u{1F399}\uFE0F SSML output (first 500 chars):", ssmlText.substring(0, 500));
     console.log("\u{1F399}\uFE0F SSML has asterisks?", ssmlText.includes("*"));
     console.log("\u{1F399}\uFE0F SSML has parentheses?", ssmlText.includes("("));
-    const TTS_API_KEY = "AIzaSyDFkbh8oCVVD8r3S8vSfBHQgpOAZrnC4Qg";
+    const TTS_API_KEY = "YOUR_GOOGLE_CLOUD_TTS_API_KEY_HERE";
     const apiUrl = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${TTS_API_KEY}`;
     const requestBody = {
       input: { ssml: ssmlText },
