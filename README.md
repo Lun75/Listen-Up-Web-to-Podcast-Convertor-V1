@@ -4,6 +4,17 @@
 
 A Chrome extension that uses **Chrome's built-in Summarizer API** (Gemini Nano on-device), Firebase AI Logic (Gemini 2.5 Flash), and Google Cloud Text-to-Speech to automatically convert web content into natural-sounding podcast audio.
 
+### For Hackathon Judges & Reviewers
+
+**Google Cloud automatically disables API keys detected in public repositories. To test the fully functional extension, please contact me:**
+
+📧 **Email**: dialina1125@gmail.com
+💬 **Subject**: "Listen Up! Extension - API Key Access Request"
+I will provide you with a complete working extension package (zip file) and API keys pre-configured and its ready to load and test immediately.
+
+**This repository contains placeholder API keys for security reasons.**
+To prevent API key leaks and service disruption, the actual working API keys have been removed from this public repository.
+
 ## Chrome Built-in AI Challenge
 
 This extension leverages **Chrome's built-in AI APIs** to provide intelligent content summarization:
@@ -60,20 +71,6 @@ Extension will be available on Chrome Web Store
    - Enable "Developer mode"
    - Click "Load unpacked"
    - Select the project directory
-
-## ⚠️ Important: API Keys Required
-
-**This repository contains placeholder API keys for security reasons.**
-
-To prevent API key leaks and service disruption, the actual working API keys have been removed from this public repository.
-
-### For Hackathon Judges & Reviewers
-
-**Google Cloud automatically disables API keys detected in public repositories. To test the fully functional extension, please contact me:**
-
-📧 **Email**: dialina1125@gmail.com
-💬 **Subject**: "Listen Up! Extension - API Key Access Request"
-I will provide you with a complete working extension package (zip file) and API keys pre-configured and its ready to load and test immediately.
 
 ### For Developers (Building from Source)
 
