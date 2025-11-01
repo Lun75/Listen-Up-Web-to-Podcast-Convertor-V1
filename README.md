@@ -1,87 +1,315 @@
 # Listen Up! Podcast Converter
 
-A browser extension for converting and managing podcast audio files with ease.
+> Transform web articles into engaging podcast scripts with AI-powered narration
 
-## Features
+A Chrome extension that uses Firebase AI Logic (Gemini 2.5 Flash) and Google Cloud Text-to-Speech to automatically convert web content into natural-sounding podcast audio.
 
-- Convert podcast audio to multiple formats (MP3, M4A, OGG)
-- Simple and intuitive user interface
-- Conversion history tracking
-- Auto-detection of podcast content on web pages
-- Local storage for preferences and history
+## ✨ Features
 
-## Installation
+- 🤖 **AI-Powered Script Generation** - Gemini 2.5 Flash creates engaging podcast scripts
+- 🎙️ **Neural2 Text-to-Speech** - 13 high-quality voices (US, UK, AU English)
+- 📝 **SSML Processing** - Natural pauses, emphasis, and intonation
+- 🎚️ **Customizable Output** - Adjust difficulty level and length
+- 📚 **Conversion History** - Track and replay previous conversions
+- ⚡ **Fast Processing** - Complete pipeline in 7-15 seconds
 
-### Development Installation
+## 🎬 Demo
 
-1. Clone this repository:
+1. Navigate to any article or blog post
+2. Click the extension icon
+3. Click "Convert This Page"
+4. Listen to AI-generated podcast narration
+
+## 📦 Installation
+
+### For End Users (Coming Soon)
+Extension will be available on Chrome Web Store
+
+### For Developers
+
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/Lun75/listen-up-podcast-converter.git
    cd listen-up-podcast-converter
    ```
 
-2. Load the extension in Chrome/Edge:
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Build the offscreen bundle:**
+   ```bash
+   npx esbuild src/offscreen-firebase.js \
+     --bundle \
+     --outfile=offscreen-bundle-v2.js \
+     --format=esm
+   ```
+
+4. **Load in Chrome:**
    - Open `chrome://extensions/`
-   - Enable "Developer mode" (toggle in top right)
+   - Enable "Developer mode"
    - Click "Load unpacked"
-   - Select the `listen-up-podcast-converter` directory
+   - Select the project directory
 
-3. Load the extension in Firefox:
-   - Open `about:debugging#/runtime/this-firefox`
-   - Click "Load Temporary Add-on"
-   - Select the `manifest.json` file
+## ⚙️ Configuration
 
-## Usage
+### Demo API Keys (Included)
 
-1. Click the extension icon in your browser toolbar
-2. Enter a podcast URL
-3. Select your desired output format
-4. Click "Convert"
-5. View your conversion history in the popup
+The extension includes demo Firebase and Google Cloud API keys for testing:
+- **Firebase API Key**: For Gemini AI (included)
+- **Google Cloud TTS API Key**: For Neural2 voices (included)
 
-## Development
+⚠️ **Important Notes:**
+- Demo keys have **limited quota** (free trial)
+- Keys are restricted to specific APIs only
+- **For production use**, create your own Firebase project (see Setup Guide below)
+
+### Setup Your Own Firebase Project (Optional)
+
+If you want unlimited usage or the demo keys stop working:
+
+1. **Create Firebase Project:**
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Create new project: "My Podcast Converter"
+   - Add a web app
+
+2. **Enable Required Services:**
+   - Firebase AI Logic (Gemini)
+   - Set enforcement to "Unenforced" (for development)
+
+3. **Enable Google Cloud TTS:**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Enable "Cloud Text-to-Speech API"
+   - Create API key
+   - Restrict to "Cloud Text-to-Speech API"
+
+4. **Update Configuration:**
+   - Edit `src/offscreen-firebase.js`
+   - Replace `firebaseConfig` with your config
+   - Replace `TTS_API_KEY` with your TTS key
+   - Rebuild bundle (step 3 above)
+
+See [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) for detailed setup instructions.
+
+## 🚀 Usage
+
+### Basic Conversion
+
+1. **Navigate to an article** (blog post, news article, documentation)
+2. **Click extension icon** in Chrome toolbar
+3. **Click "Convert This Page"** button
+4. **Wait 10-15 seconds** for AI processing
+5. **Click "Play Audio"** to listen
+
+### Settings
+
+- **Difficulty Level:**
+  - Easy: Simple language, beginner-friendly
+  - Medium: Balanced complexity
+  - Hard: Technical language, advanced
+
+- **Script Length:**
+  - Short: 2-4 minute podcast
+  - Medium: 5-8 minute podcast
+  - Long: 10-15 minute podcast
+
+- **Voice Selection:**
+  - 13 Neural2 voices available
+  - US, UK, and Australian English
+  - Male and female options
+
+### Download & Copy
+
+- **Download Script**: Save as Markdown or TXT
+- **Copy to Clipboard**: Quick copy for editing
+- **View History**: Access previous conversions
+
+## 🏗️ Architecture
+
+```
+Web Content → Content Extraction → Gemini AI (Summarize + Rewrite)
+  → SSML Conversion → Google Cloud TTS → Audio Playback
+```
+
+**Key Components:**
+- **Firebase AI Logic SDK**: Gemini 2.5 Flash for script generation
+- **Google Cloud TTS**: Neural2 voices for high-quality audio
+- **SSML Processing**: Removes formatting, adds natural pauses
+- **Chrome Extension MV3**: Modern extension architecture
+
+See [AI_PIPELINE.md](AI_PIPELINE.md) for detailed architecture documentation.
+
+## 🛠️ Development
 
 ### Project Structure
 
 ```
 listen-up-podcast-converter/
-├── manifest.json           # Extension manifest (V3)
-├── popup.html             # Extension popup UI
-├── css/
-│   └── popup.css         # Popup styles
+├── manifest.json              # Extension manifest
+├── popup.html                 # Main UI
+├── offscreen.html            # Firebase offscreen document
+├── offscreen-bundle-v2.js    # Bundled Firebase SDK (152KB)
 ├── js/
-│   ├── popup.js          # Popup logic
-│   ├── background.js     # Service worker
-│   └── content.js        # Content script
-├── icons/                # Extension icons
-└── LICENSE               # MIT License
+│   ├── popup.js              # UI controller
+│   ├── background.js         # Service worker
+│   ├── aiServiceHybrid.js    # AI service wrapper
+│   ├── googleCloudTTS.js     # TTS client
+│   ├── pipelineOrchestrator.js  # Pipeline coordinator
+│   ├── contentExtractor.js   # Content extraction
+│   └── transcriptHandler.js  # Script formatting
+├── src/
+│   └── offscreen-firebase.js # Firebase SDK source
+└── docs/
+    ├── AI_PIPELINE.md        # Architecture docs
+    ├── DEBUGGING.md          # Troubleshooting
+    └── IMPLEMENTATION_GUIDE.md  # Developer guide
 ```
 
-### Permissions
+### Making Changes
 
-- `storage` - Store conversion history and settings
-- `downloads` - Download converted files
-- `activeTab` - Access current tab for podcast detection
-- `host_permissions` - Access podcast URLs for conversion
+**Edit main code:**
+```bash
+# Make changes to JS files
+# Reload extension at chrome://extensions/
+```
 
-## TODO
+**Edit Firebase offscreen:**
+```bash
+# Edit src/offscreen-firebase.js
+npx esbuild src/offscreen-firebase.js --bundle --outfile=offscreen-bundle-v2.js --format=esm
+# Reload extension
+```
 
-- [ ] Implement actual audio conversion logic
-- [ ] Add icon assets (16x16, 48x48, 128x128)
-- [ ] Add settings page for user preferences
-- [ ] Support for batch conversions
-- [ ] Integration with popular podcast platforms
-- [ ] Audio quality selection
-- [ ] Download progress tracking
+### Testing
 
-## Contributing
+See [DEBUGGING.md](DEBUGGING.md) for comprehensive testing guide.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+**Quick test:**
+```javascript
+// In popup console
+await chrome.runtime.sendMessage({ action: 'ping' })
+// Should return: {success: true, firebaseInitialized: true}
+```
 
-## License
+## 📊 Performance
 
-MIT License - see [LICENSE](LICENSE) file for details
+- **Content Extraction**: < 100ms
+- **AI Summarization**: 2-4 seconds
+- **AI Rewriting**: 3-6 seconds
+- **TTS Synthesis**: 1-3 seconds
+- **Total Pipeline**: 7-15 seconds
 
-## Version
+**Bundle Size:**
+- Offscreen bundle: 152KB
+- Total extension: ~500KB
 
-Current version: 0.1.0
+## 🔐 Privacy & Security
+
+- **Local Processing**: Content extraction happens in browser
+- **Cloud Processing**: AI and TTS via Google Cloud APIs
+- **No Data Storage**: Scripts stored locally only
+- **No Tracking**: No analytics or user tracking
+- **API Keys**: Restricted to specific services only
+
+All content sent to Google Cloud for AI processing is temporary and not stored.
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**"No AI service available"**
+- Go to Firebase Console → AI Logic → Set to "Unenforced"
+
+**"TTS API not enabled"**
+- Enable Cloud Text-to-Speech API in Google Cloud Console
+- Wait 2-3 minutes for propagation
+
+**TTS reads asterisks/formatting**
+- Reload extension completely
+- Clear browser cache
+- Check offscreen console for SSML conversion logs
+
+**Slow performance**
+- Normal for first request (cold start)
+- Check internet connection
+- Very long articles take longer
+
+See [DEBUGGING.md](DEBUGGING.md) for detailed troubleshooting guide.
+
+## 📚 Documentation
+
+- **[AI_PIPELINE.md](AI_PIPELINE.md)** - Complete architecture documentation
+- **[DEBUGGING.md](DEBUGGING.md)** - Troubleshooting guide
+- **[IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)** - Developer guide
+- **[CLAUDE.md](CLAUDE.md)** - Development guidelines
+
+## 🤝 Contributing
+
+Contributions welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Test thoroughly (see DEBUGGING.md)
+5. Commit (`git commit -m 'Add amazing feature'`)
+6. Push (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+### Development Guidelines
+
+- Follow existing code style (ES6+, async/await)
+- Add comments for complex logic
+- Test with multiple websites
+- Update documentation if needed
+- Rebuild bundle after Firebase changes
+
+## 🗺️ Roadmap
+
+### Planned Features
+- [ ] Backend proxy via Firebase Cloud Functions (secure API keys)
+- [ ] Multi-speaker support (different voices for dialogue)
+- [ ] Background music (intro/outro)
+- [ ] Batch conversion (multiple articles)
+- [ ] Export MP3 with metadata
+- [ ] Integration with podcast platforms
+
+### Ideas
+- Offline mode with cached scripts
+- Custom voice training
+- Multi-language support
+- RSS feed generation
+- Chrome Web Store publication
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **Firebase AI Logic SDK** - Gemini 2.5 Flash integration
+- **Google Cloud Text-to-Speech** - Neural2 voices
+- **Chrome Extensions Team** - Manifest V3 platform
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/Lun75/listen-up-podcast-converter/issues)
+- **Documentation**: See docs/ folder
+- **Email**: dialina1125@gmail.com
+
+## 📈 Version History
+
+**v0.1.0** (Current)
+- Initial release
+- Firebase AI Logic integration
+- Google Cloud TTS Neural2 voices
+- SSML processing for natural speech
+- 13 voice options
+- Conversion history
+- Download/copy functionality
+
+---
+
+**Note**: This extension uses Google Cloud APIs which have usage quotas. Demo API keys are provided for testing but may have limited availability. For production use, please set up your own Firebase project.
+
+Made with ❤️ by Dialina

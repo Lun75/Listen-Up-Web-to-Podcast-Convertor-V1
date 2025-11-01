@@ -1,10 +1,15 @@
 // Content script for Listen Up! Podcast Converter
-// Runs on web pages to detect and interact with podcast content
+// Runs on web pages to extract content and detect podcast audio
 
 (function() {
   'use strict';
 
   console.log('Listen Up! Podcast Converter content script loaded');
+
+  // Load content extractor in page context
+  const script = document.createElement('script');
+  script.src = chrome.runtime.getURL('js/contentExtractor.js');
+  (document.head || document.documentElement).appendChild(script);
 
   // Detect podcast audio elements on the page
   function detectPodcastAudio() {
@@ -60,6 +65,31 @@
     if (request.action === 'detectPodcasts') {
       const podcasts = detectPodcastAudio();
       sendResponse({ podcasts: podcasts });
+      return true;
+    }
+
+    if (request.action === 'extractContent') {
+      // Extract content using the content extractor
+      try {
+        // Wait for content extractor to be loaded
+        setTimeout(() => {
+          if (typeof window.contentExtractor !== 'undefined') {
+            const content = window.contentExtractor.extract();
+            sendResponse({ success: true, content: content });
+          } else {
+            sendResponse({
+              success: false,
+              error: 'Content extractor not loaded'
+            });
+          }
+        }, 100);
+      } catch (error) {
+        sendResponse({
+          success: false,
+          error: error.message
+        });
+      }
+      return true; // Keep channel open for async response
     }
   });
 

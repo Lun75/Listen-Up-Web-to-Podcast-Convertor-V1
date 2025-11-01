@@ -14,23 +14,77 @@
     </header>
 
     <main>
+      <section class="ai-status-section">
+        <div id="ai-status" class="ai-status">
+          <span class="status-indicator" id="ai-indicator"></span>
+          <span id="ai-status-text">Checking AI availability...</span>
+        </div>
+      </section>
+
       <section class="converter-section">
-        <h2>Convert Podcast</h2>
-        <div class="input-group">
-          <label for="podcast-url">Podcast URL:</label>
-          <input type="url" id="podcast-url" placeholder="Enter podcast URL">
+        <h2>Convert to Podcast Script</h2>
+
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="current-page">Current Page</button>
+          <button class="tab-btn" data-tab="url">From URL</button>
         </div>
 
-        <div class="format-selection">
-          <label>Output Format:</label>
-          <div class="format-options">
-            <button class="format-btn active" data-format="mp3">MP3</button>
-            <button class="format-btn" data-format="m4a">M4A</button>
-            <button class="format-btn" data-format="ogg">OGG</button>
+        <div class="tab-content" id="current-page-tab">
+          <p class="info-text">Convert the current page to a podcast script</p>
+          <button id="convert-page-btn" class="primary-btn">Convert This Page</button>
+        </div>
+
+        <div class="tab-content hidden" id="url-tab">
+          <div class="input-group">
+            <label for="podcast-url">Page URL:</label>
+            <input type="url" id="podcast-url" placeholder="Enter article URL">
+          </div>
+          <button id="convert-url-btn" class="primary-btn">Convert URL</button>
+        </div>
+
+        <div class="settings-section">
+          <h3>Script Settings</h3>
+
+          <div class="setting-group">
+            <label for="difficulty-select">Difficulty Level:</label>
+            <select id="difficulty-select">
+              <option value="easy">Easy - Simple language</option>
+              <option value="medium" selected>Medium - Balanced</option>
+              <option value="hard">Hard - Technical</option>
+            </select>
+            <p class="help-text">Controls vocabulary complexity and explanation depth</p>
+          </div>
+
+          <div class="setting-group">
+            <label for="length-select">Script Length:</label>
+            <select id="length-select">
+              <option value="short">Short (2-4 min)</option>
+              <option value="medium" selected">Medium (5-8 min)</option>
+              <option value="long">Long (10-15 min)</option>
+            </select>
+            <p class="help-text">Target reading time for the generated script</p>
+          </div>
+
+          <div class="setting-group">
+            <label for="voice-select">Voice (Google Cloud TTS):</label>
+            <select id="voice-select">
+              <option value="en-US-Neural2-F" selected>Female 3 (US) - Natural</option>
+              <option value="en-US-Neural2-C">Female 1 (US)</option>
+              <option value="en-US-Neural2-E">Female 2 (US)</option>
+              <option value="en-US-Neural2-G">Female 4 (US)</option>
+              <option value="en-US-Neural2-H">Female 5 (US)</option>
+              <option value="en-US-Neural2-A">Male 1 (US)</option>
+              <option value="en-US-Neural2-D">Male 2 (US)</option>
+              <option value="en-US-Neural2-I">Male 3 (US)</option>
+              <option value="en-US-Neural2-J">Male 4 (US)</option>
+              <option value="en-GB-Neural2-A">Female (UK)</option>
+              <option value="en-GB-Neural2-B">Male (UK)</option>
+              <option value="en-AU-Neural2-A">Female (AU)</option>
+              <option value="en-AU-Neural2-B">Male (AU)</option>
+            </select>
+            <p class="help-text">High-quality Neural2 voices for podcast narration</p>
           </div>
         </div>
-
-        <button id="convert-btn" class="primary-btn">Convert</button>
       </section>
 
       <section class="status-section">
@@ -40,10 +94,33 @@
         </div>
       </section>
 
+      <section class="result-section" id="result-section" style="display: none;">
+        <h3>Generated Script</h3>
+        <div class="result-actions">
+          <button id="play-tts-btn" class="action-btn primary">▶ Play Audio</button>
+          <button id="pause-tts-btn" class="action-btn" style="display: none;">⏸ Pause</button>
+          <button id="stop-tts-btn" class="action-btn" style="display: none;">⏹ Stop</button>
+        </div>
+        <div class="tts-progress" id="tts-progress" style="display: none;">
+          <div class="tts-progress-bar">
+            <div class="tts-progress-fill" id="tts-progress-fill"></div>
+          </div>
+          <span class="tts-status" id="tts-status">Playing...</span>
+        </div>
+        <div class="result-actions">
+          <button id="download-md-btn" class="action-btn">Download (.md)</button>
+          <button id="download-txt-btn" class="action-btn">Download (.txt)</button>
+          <button id="download-html-btn" class="action-btn">Download (.html)</button>
+          <button id="copy-btn" class="action-btn">Copy to Clipboard</button>
+        </div>
+        <div class="script-stats" id="script-stats"></div>
+        <div class="script-preview" id="script-preview"></div>
+      </section>
+
       <section class="history-section">
-        <h3>Recent Conversions</h3>
+        <h3>Recent Scripts</h3>
         <div id="history-list" class="history-list">
-          <p class="empty-state">No conversions yet</p>
+          <p class="empty-state">No scripts generated yet</p>
         </div>
       </section>
     </main>
@@ -54,6 +131,12 @@
     </footer>
   </div>
 
+  <script src="js/aiServiceHybrid.js"></script>
+  <script src="js/contentExtractor.js"></script>
+  <script src="js/transcriptHandler.js"></script>
+  <script src="js/ttsService.js"></script>
+  <script src="js/googleCloudTTS.js"></script>
+  <script src="js/pipelineOrchestrator.js"></script>
   <script src="js/popup.js"></script>
 </body>
 </html>

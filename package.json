@@ -1,0 +1,27 @@
+{
+  "name": "listen-up-podcast-converter",
+  "version": "1.0.0",
+  "description": "A browser extension for converting and managing podcast audio files with ease.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lun75/listen-up-podcast-converter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lun75/listen-up-podcast-converter/issues"
+  },
+  "homepage": "https://github.com/Lun75/listen-up-podcast-converter#readme",
+  "dependencies": {
+    "@google-cloud/text-to-speech": "^6.4.0",
+    "firebase": "^12.4.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.11"
+  }
+}

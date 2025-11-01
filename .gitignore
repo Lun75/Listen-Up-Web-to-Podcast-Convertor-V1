@@ -15,6 +15,7 @@ dist/
 
 # Dependencies
 node_modules/
+lib/
 
 # Environment
 .env

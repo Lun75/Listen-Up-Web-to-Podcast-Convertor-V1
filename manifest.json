@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Listen Up! Podcast Converter",
   "version": "0.1.0",
-  "description": "Convert and manage podcast audio files with ease",
+  "description": "Convert web articles into engaging podcast scripts using AI",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -19,7 +19,9 @@
   "permissions": [
     "storage",
     "downloads",
-    "activeTab"
+    "activeTab",
+    "scripting",
+    "offscreen"
   ],
   "host_permissions": [
     "https://*/*",
@@ -34,5 +36,14 @@
       "js": ["js/content.js"],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["js/contentExtractor.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  }
 }
